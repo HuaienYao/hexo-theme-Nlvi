@@ -13,10 +13,24 @@ $normal-fonts = "Source Sans Pro", "Helvetica Neue", Arial, sans-serif
 $header-fonts = 'Allura', cursive, serif
 
 // Article Font
-$article-fonts = 'Optima', 'PingFang SC', 'Roboto', 'Noto SansCJK', 'Helvetica Neue', 'Helvetica', "微软雅黑", "YaHei-Consolas-Hybrid", sans-serif
+$article-fonts = {
+  default: 'Optima'\, 'PingFang SC'\, 'Roboto'\, 'Noto SansCJK'\, 'Helvetica Neue'\, 'Helvetica'\, "Microsoft YaHei"\, "YaHei-Consolas-Hybrid"\, sans-serif
+  YaHei: STHeiti\, 'Microsoft YaHei'\, "微软雅黑"\, serif
+  Hel: 'Helvetica'\, 'Hiragino Sans GB'\, 'Roboto'\, 'Noto SansCJK'\, 'Heiti TC'\, 'Heiti SC'\, sans-serif
+  Simsun: 'Times New Roman'\, 'Simsun'\, 'STSong'\, '华文宋体'\, sans-serif
+}
+$fonts-style = hexo-config('fonts-style')
+if $fonts-style in $article-fonts
+  $article-fonts = $article-fonts[$fonts-style]
+  if $fonts-style == 'Custom'
+    $article-fonts = $custom-article-font
+else
+  $fonts-style = $article-fonts['default']
 
 // Code Font
 $code-fonts = 'Segoe UI', monospace, Consolas, Monaco, Menlo, sans-serif
+if hexo-config('code-style') == 'Custom'
+  $code-fonts = $custom-code-font
 
 $heading-list = {
   h1: 26px
@@ -46,10 +60,8 @@ $color-code-symbol = #cb4b16
 // ======== Global ========
 $global-setting = {
   font-size: 16px,
-  body-width: 800px,
-  background: #f0f0f0,
-  color: #49545f,
-  container-padding: (yard*2)
+  background: #fff,
+  color: #49545f
 }
 
 // ======== Theme ========
@@ -58,8 +70,7 @@ $theme-style = hexo-config("theme-style")
 $theme-list = {
   dark: {
     main: #666
-    highlight: #000,
-    color: #353535
+    highlight: #353535
   },
   sakura: {
     main: #fe89c3,
@@ -68,13 +79,29 @@ $theme-list = {
   miku: {
     main: #39C5BB,
     highlight: #54DDD3
-  }
+  },
+  green: {
+    main: #70bc68,
+    highlight: #70fc77
+  },
+  blue: {
+    main: #5eb0ff,
+    highlight: #73b7f9
+  },
+  purple: {
+    main: #596fef,
+    highlight: #7597f9
+  },
 }
 
-unless $theme-style in $theme-list
-  $theme-select = $theme-list['default']
 if $theme-style in $theme-list
   $theme-select = $theme-list[$theme-style]
+  if $theme-style == 'Custom'
+    $theme-select = $custom-theme-style
+    $global-setting = $custom-theme-global
+else
+  $theme-select = $theme-list['default']
+
 
 $theme-color-main = $theme-select.main
 $theme-color-selection = $global-setting.background

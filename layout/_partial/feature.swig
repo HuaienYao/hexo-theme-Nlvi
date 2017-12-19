@@ -1,4 +1,7 @@
 {% include "../_script/script.swig" %}
 
 {% include "../_script/backtop.swig" %}
-{% include "../_script/_plugin/search.swig" %}
+
+{% if theme.scheme == 'banderole' %}
+  {% include "../_script/_plugin/search.swig" %}  
+{% endif %}

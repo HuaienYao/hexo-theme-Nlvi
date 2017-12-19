@@ -14,11 +14,11 @@
           {% endif %}
           {% if is_post() %}
             {% if post.tags and post.tags.length %}
-              <div class="post-tags syuanpi riseIn-light back-3">
+              <aside class="post-tags syuanpi riseIn-light back-3">
               {% for tag in post.tags %}
                 <a href="{{ url_for(tag.path) }}">{{ tag.name }}</a>
               {% endfor %}
-              </div>
+              </aside>
             {% endif %}
           {% endif %}
         </div>
